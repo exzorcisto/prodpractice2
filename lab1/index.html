@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Шифрование/дешифрование ROT13</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Шифрование/дешифрование ROT13</h1>
+        
+        <div class="container">
+            <div class="box">
+                <h2>Исходный текст</h2>
+                <textarea id="inputText" placeholder="Введите текст здесь..."></textarea>
+                <button id="encryptBtn">Зашифровать (ROT13)</button>
+                <button id="decryptBtn">Расшифровать (ROT13)</button>
+            </div>
+            
+            <div class="box">
+                <h2>Результат</h2>
+                <div id="outputText" class="result">Результат появится здесь...</div>
+            </div>
+        </div>
+        
+        <div class="alphabet-display">
+            <h3>Используемый алфавит:</h3>
+            <div id="alphabetDisplay"></div>
+            <h3>Операции:</h3>
+            <div id="operationsLog"></div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
