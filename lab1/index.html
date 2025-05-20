@@ -13,22 +13,15 @@
             <div class="box">
                 <h2>Исходный текст</h2>
                 <textarea id="inputText" placeholder="Введите текст здесь..."></textarea>
-                <button id="encryptBtn">Зашифровать (ROT13)</button>
-                <button id="decryptBtn">Расшифровать (ROT13)</button>
             </div>
             
             <div class="box">
                 <h2>Результат</h2>
-                <div id="outputText" class="result">Результат появится здесь...</div>
+                <textarea id="outputText" placeholder="Введите текст здесь..." readonly></textarea>
             </div>
         </div>
-        
-        <div class="alphabet-display">
-            <h3>Используемый алфавит:</h3>
-            <div id="alphabetDisplay"></div>
-            <h3>Операции:</h3>
-            <div id="operationsLog"></div>
-        </div>
-        <script src="script.js"></script>
+
+        <button id="encryptBtn">Преобразовать ROT13</button>
     </body>
+    <script src="script.js"></script>
 </html>
