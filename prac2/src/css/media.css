@@ -1,0 +1,42 @@
+/* для планшетов (768px - 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        gap: 20px;
+    }
+    textarea {
+        width: 400px;
+        height: 250px;
+        font-size: 18px;
+    }
+}
+
+/* для мобильных устройств (до 768px) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    textarea {
+        width: 90%;
+        height: 200px;
+        font-size: 16px;
+        padding: 15px;
+    }
+    button {
+        font-size: 18px;
+        padding: 12px 25px;
+    }
+}
+
+/* для очень маленьких экранов (до 480px) */
+@media (max-width: 480px) {
+    textarea {
+        height: 150px;
+        font-size: 14px;
+    }
+    button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}

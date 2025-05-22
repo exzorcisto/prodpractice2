@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Шифрование/дешифрование ROT13</title>
+        <link rel="stylesheet" href="./../../css/style.css">
+        <link rel="stylesheet" href="./../../css/media.css">
+    </head>
+    <body>
+        <h1>Шифрование/дешифрование ROT13</h1>
+        
+        <div class="container">
+            <div class="box">
+                <h2>Исходный текст</h2>
+                <textarea id="inputText" placeholder="Введите текст здесь..."></textarea>
+            </div>
+            
+            <div class="box">
+                <h2>Результат</h2>
+                <textarea id="outputText" placeholder="Введите текст здесь..." readonly></textarea>
+            </div>
+        </div>
+
+        <button id="encryptBtn">Преобразовать ROT13</button>
+    </body>
+    <script src="TheEncoder.js"></script>
+</html>
