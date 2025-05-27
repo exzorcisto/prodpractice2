@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Catalog</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Product Search</h1>
+  <input type="text" id="searchInput" placeholder="Search products..." />
+  <button onclick="search()">Search</button>
+  <div id="results"></div>
+
+  <script>
+      async function fetchProducts(endpoint) {
+      const res = await fetch(endpoint);
+      const data = await res.json();
+      displayProducts(data.products || [data]);
+    }
+
+    function displayProducts(products) {
+      const container = document.getElementById('results');
+      container.innerHTML = '';
+      products.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = `
+          <h3>${p.title}</h3>
+          <p>$${p.price}</p>
+          <img src="../images/product_${p.id}.jpg" alt="${p.title}">
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function search() {
+      const q = document.getElementById('searchInput').value.trim();
+      if (q) fetchProducts(`/api/products/search?q=${encodeURIComponent(q)}`);
+    }
+
+    fetchProducts('/api/products');
+  </script>
+</body>
+</html>
