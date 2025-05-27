@@ -1,0 +1,26 @@
+:root {
+    --color-bcg: #ffffff;
+    --color-on-bcg: #f8f8f8;
+    --color-on-bcg-outline: #dcdcdc;
+    --color-h1: #1a1a1a;
+    --color-h2: #1a1a1a;
+    --color-h3: #1a1a1a;
+    --color-text-main: #1a1a1a;
+    --color-text-button: #363636;
+    --color-text-light: #484848;
+    --color-text-light-surface: #a9a9a9;
+    --color-text-placeholder: #777777;
+    --color-input: #f3f3f3;
+
+    --color-box-shadow-rgb: 26, 26, 26;
+    --color-box-shadow: rgba(var(--color-box-shadow-rgb), 0.1);
+
+    --color-theme: rgb(255, 204, 220);
+    --color-theme-dark-rgb: 255, 165, 202;
+    --color-theme-dark: rgb(var(--color-theme-dark-rgb));
+
+}
+
+.product {
+  --color-product-shadow: rgba(var(--color-theme-dark-rgb), 0.1);
+}

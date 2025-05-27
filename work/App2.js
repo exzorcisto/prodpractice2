@@ -8,9 +8,10 @@ const PORT = 3000;
 const DUMMY_JSON_API = 'https://dummyjson.com/products';
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const IMAGES_DIR = path.join(PUBLIC_DIR, 'images');
+const PRODUCTS_PER_PAGE = 10;
 
-if (!fs.existsSync(IMAGES_DIR)) fs.mkdirSync(IMAGES_DIR);
-if (!fs.existsSync(PUBLIC_DIR)) fs.mkdirSync(PUBLIC_DIR);
+if (!fs.existsSync(IMAGES_DIR)) fs.mkdirSync(IMAGES_DIR, { recursive: true });
+if (!fs.existsSync(PUBLIC_DIR)) fs.mkdirSync(PUBLIC_DIR, { recursive: true });
 
 const server = http.createServer(async (req, res) => {
   let parsedUrl = url.parse(req.url, true);
@@ -56,10 +57,23 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (requestPath === '/api/products' && method === 'GET') {
-      let apiUrl = buildApiUrl(DUMMY_JSON_API, query);
+      const page = parseInt(query.page) || 1;
+      const skip = (page - 1) * PRODUCTS_PER_PAGE;
+      
+      let apiUrl = buildApiUrl(DUMMY_JSON_API, { 
+        ...query, 
+        limit: PRODUCTS_PER_PAGE, 
+        skip 
+      });
+      
       let data = await makeRequest(apiUrl);
       await downloadAndSaveImages(data.products);
-      respond(res, 200, data);
+      respond(res, 200, {
+        ...data,
+        total: data.total,
+        page,
+        totalPages: Math.ceil(data.total / PRODUCTS_PER_PAGE)
+      });
     }
 
     else if (/^\/api\/products\/\d+$/.test(requestPath) && method === 'GET') {
@@ -70,12 +84,20 @@ const server = http.createServer(async (req, res) => {
     }
 
     else if (requestPath === '/api/products/search' && method === 'GET') {
-      let { q } = query;
+      let { q, page = 1 } = query;
       if (!q) return respond(res, 400, { error: 'Search query parameter "q" is required' });
-      let apiUrl = `${DUMMY_JSON_API}/search?q=${encodeURIComponent(q)}`;
+      
+      page = parseInt(page);
+      const skip = (page - 1) * PRODUCTS_PER_PAGE;
+      
+      let apiUrl = `${DUMMY_JSON_API}/search?q=${encodeURIComponent(q)}&limit=${PRODUCTS_PER_PAGE}&skip=${skip}`;
       let data = await makeRequest(apiUrl);
       await downloadAndSaveImages(data.products);
-      respond(res, 200, data);
+      respond(res, 200, {
+        ...data,
+        page,
+        totalPages: Math.ceil(data.total / PRODUCTS_PER_PAGE)
+      });
     }
 
     else {
